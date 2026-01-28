@@ -4,6 +4,7 @@ import ResultList from "./components/ResultList";
 import { calculate } from "./api";
 import { loadHistory, saveToHistory } from "./history";
 import HistoryList from "./components/HistoryList";
+import { calculateBestValue } from "./calculator/calculate";
 
 export default function App() {
   const [options, setOptions] = useState([]);
@@ -49,12 +50,16 @@ export default function App() {
   };
 
   const calculateBest = async () => {
-    if (!isOnline) {
-      alert("You are offline. New calculations require internet.");
-      return;
+    let res;
+
+    if (isOnline) {
+      // online → use backend
+      res = await calculate(options);
+    } else {
+      // offline → calculate locally
+      res = calculateBestValue(options);
     }
 
-    const res = await calculate(options);
     setResults(res);
 
     const item = {
@@ -67,7 +72,6 @@ export default function App() {
     const updatedHistory = saveToHistory(item);
     setHistory(updatedHistory);
   };
-
 
   const canCalculate =
     options.length > 0 &&
@@ -131,7 +135,7 @@ export default function App() {
           borderRadius: "8px",
         }}
       >
-        {isOnline ? "Calculate" : "Offline"}
+        {isOnline ? "Calculate" : "Calculate (Offline)"}
       </button>
 
 
