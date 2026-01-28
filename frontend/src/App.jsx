@@ -2,11 +2,21 @@ import { useState } from "react";
 import OptionForm from "./components/OptionForm";
 import ResultList from "./components/ResultList";
 import { calculate } from "./api";
+import { loadHistory, saveToHistory } from "./history";
+import HistoryList from "./components/HistoryList";
+
+
 
 export default function App() {
   const [options, setOptions] = useState([]);
   const [results, setResults] = useState([]);
+  const [history, setHistory] = useState(loadHistory());
 
+  const loadFromHistory = (item) => {
+    setOptions(item.options);
+    setResults(item.results);
+  };
+  
   const addOption = () => {
     setOptions([
       ...options,
@@ -29,7 +39,18 @@ export default function App() {
   const calculateBest = async () => {
     const res = await calculate(options);
     setResults(res);
+
+    const item = {
+      id: crypto.randomUUID(),
+      createdAt: Date.now(),
+      options,
+      results: res,
+    };
+
+    const updatedHistory = saveToHistory(item);
+    setHistory(updatedHistory);
   };
+
 
   const canCalculate =
     options.length > 0 &&
@@ -50,7 +71,7 @@ export default function App() {
       ))}
 
       <button onClick={addOption}>+ Add Option</button>
-            <button
+      <button
         onClick={() => {
           setOptions([]);
           setResults([]);
@@ -82,6 +103,10 @@ export default function App() {
 
 
       <ResultList results={results} />
+      <HistoryList
+        history={history}
+        onSelect={loadFromHistory}
+      />
     </div>
   );
 }
