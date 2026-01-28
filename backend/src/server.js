@@ -1,29 +1,37 @@
+const express = require("express");
 const { calculateBestValue } = require("./calculator/calculate");
 
-const options = [
-  {
-    name: "Small",
-    price: 20,
-    size: 125,
-    unit: "g",
-    promoType: "none",
-  },
-  {
-    name: "Medium",
-    price: 40,
-    size: 200,
-    unit: "g",
-    promoType: "none",
-  },
-  {
-    name: "Large",
-    price: 100,
-    size: 450,
-    unit: "g",
-    promoType: "buyXgetY",
-    promoValue: 2,
-    promoExtra: 1,
-  },
-];
+const app = express();
+const PORT = process.env.PORT || 3001;
 
-console.log(calculateBestValue(options));
+app.use(express.json());
+
+app.post("/calculate", (req, res) => {
+  try {
+    const { options } = req.body;
+
+    if (!options) {
+      return res.status(400).json({
+        error: "options field is required",
+      });
+    }
+
+    const results = calculateBestValue(options);
+
+    res.json({
+      results,
+    });
+  } catch (err) {
+    res.status(400).json({
+      error: err.message,
+    });
+  }
+});
+
+app.get("/health", (_req, res) => {
+  res.json({ status: "ok" });
+});
+
+app.listen(PORT, () => {
+  console.log(`Best Value Calculator API running on port ${PORT}`);
+});
