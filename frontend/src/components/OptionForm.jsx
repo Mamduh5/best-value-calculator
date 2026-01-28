@@ -6,12 +6,14 @@ export default function OptionForm({ option, onChange }) {
   return (
     <div style={{ border: "1px solid #ccc", padding: 12, marginBottom: 8 }}>
       <input
+        style={{ padding: 8, marginBottom: 6 }}
         placeholder="Name"
         value={option.name}
         onChange={(e) => update("name", e.target.value)}
       />
 
       <input
+        style={{ padding: 8, marginBottom: 6 }}
         type="number"
         placeholder="Price"
         value={option.price}
@@ -19,6 +21,7 @@ export default function OptionForm({ option, onChange }) {
       />
 
       <input
+        style={{ padding: 8, marginBottom: 6 }}
         type="number"
         placeholder="Size"
         value={option.size}
@@ -47,11 +50,13 @@ export default function OptionForm({ option, onChange }) {
       {option.promoType === "buyXgetY" && (
         <>
           <input
+            style={{ padding: 8, marginBottom: 6 }}
             type="number"
             placeholder="Buy X"
             onChange={(e) => update("promoValue", Number(e.target.value))}
           />
           <input
+            style={{ padding: 8, marginBottom: 6 }}
             type="number"
             placeholder="Get Y"
             onChange={(e) => update("promoExtra", Number(e.target.value))}
@@ -61,6 +66,7 @@ export default function OptionForm({ option, onChange }) {
 
       {option.promoType === "discount" && (
         <input
+            style={{ padding: 8, marginBottom: 6 }}
           type="number"
           placeholder="Discount %"
           onChange={(e) => update("promoValue", Number(e.target.value))}
@@ -69,6 +75,7 @@ export default function OptionForm({ option, onChange }) {
 
       {option.promoType === "extra" && (
         <input
+            style={{ padding: 8, marginBottom: 6 }}
           type="number"
           placeholder="Extra %"
           onChange={(e) => update("promoValue", Number(e.target.value))}
