@@ -1,5 +1,5 @@
 const API_URL =
-  process.env.REACT_APP_API_URL || "http://localhost:3001";
+  import.meta.env.VITE_API_URL || "http://localhost:3001";
 
 export async function calculate(options) {
   const res = await fetch(`${API_URL}/calculate`, {
@@ -16,4 +16,3 @@ export async function calculate(options) {
 
   return data.results;
 }
-
