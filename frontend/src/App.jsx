@@ -85,21 +85,6 @@ export default function App() {
     <div style={{ padding: 16, maxWidth: 600, margin: "auto" }}>
       <h2>Best Value Calculator</h2>
 
-      {!isOnline && (
-        <div
-          style={{
-            background: "#fef3c7",
-            color: "#92400e",
-            padding: "8px",
-            borderRadius: "6px",
-            marginBottom: "12px",
-            fontSize: "14px",
-          }}
-        >
-          You are offline. Viewing saved results only.
-        </div>
-      )}
-
       {options.map((opt, i) => (
         <OptionForm
           key={i}
@@ -122,7 +107,7 @@ export default function App() {
 
       <button
         onClick={calculateBest}
-        disabled={!canCalculate || !isOnline}
+        disabled={!canCalculate}
         style={{
           opacity: isOnline ? 1 : 0.6,
           width: "100%",
