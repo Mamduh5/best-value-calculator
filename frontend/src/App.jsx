@@ -1,22 +1,34 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import OptionForm from "./components/OptionForm";
 import ResultList from "./components/ResultList";
 import { calculate } from "./api";
 import { loadHistory, saveToHistory } from "./history";
 import HistoryList from "./components/HistoryList";
 
-
-
 export default function App() {
   const [options, setOptions] = useState([]);
   const [results, setResults] = useState([]);
   const [history, setHistory] = useState(loadHistory());
+  const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  useEffect(() => {
+    const onOnline = () => setIsOnline(true);
+    const onOffline = () => setIsOnline(false);
+
+    window.addEventListener("online", onOnline);
+    window.addEventListener("offline", onOffline);
+
+    return () => {
+      window.removeEventListener("online", onOnline);
+      window.removeEventListener("offline", onOffline);
+    };
+  }, []);
 
   const loadFromHistory = (item) => {
     setOptions(item.options);
     setResults(item.results);
   };
-  
+
   const addOption = () => {
     setOptions([
       ...options,
@@ -37,6 +49,11 @@ export default function App() {
   };
 
   const calculateBest = async () => {
+    if (!isOnline) {
+      alert("You are offline. New calculations require internet.");
+      return;
+    }
+
     const res = await calculate(options);
     setResults(res);
 
@@ -58,9 +75,26 @@ export default function App() {
       (o) => o.price > 0 && o.size > 0 && o.name.trim() !== ""
     );
 
+
+
   return (
     <div style={{ padding: 16, maxWidth: 600, margin: "auto" }}>
       <h2>Best Value Calculator</h2>
+
+      {!isOnline && (
+        <div
+          style={{
+            background: "#fef3c7",
+            color: "#92400e",
+            padding: "8px",
+            borderRadius: "6px",
+            marginBottom: "12px",
+            fontSize: "14px",
+          }}
+        >
+          You are offline. Viewing saved results only.
+        </div>
+      )}
 
       {options.map((opt, i) => (
         <OptionForm
@@ -84,8 +118,9 @@ export default function App() {
 
       <button
         onClick={calculateBest}
-        disabled={!canCalculate}
+        disabled={!canCalculate || !isOnline}
         style={{
+          opacity: isOnline ? 1 : 0.6,
           width: "100%",
           padding: "12px",
           fontSize: "18px",
@@ -96,7 +131,7 @@ export default function App() {
           borderRadius: "8px",
         }}
       >
-        Calculate
+        {isOnline ? "Calculate" : "Offline"}
       </button>
 
 
