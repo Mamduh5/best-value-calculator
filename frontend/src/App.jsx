@@ -1,35 +1,55 @@
-import { useState } from 'react'
-import reactLogo from './assets/react.svg'
-import viteLogo from '/vite.svg'
-import './App.css'
+import { useState } from "react";
+import OptionForm from "./components/OptionForm";
+import ResultList from "./components/ResultList";
+import { calculate } from "./api";
 
-function App() {
-  const [count, setCount] = useState(0)
+export default function App() {
+  const [options, setOptions] = useState([]);
+  const [results, setResults] = useState([]);
+
+  const addOption = () => {
+    setOptions([
+      ...options,
+      {
+        name: "",
+        price: "",
+        size: "",
+        unit: "g",
+        promoType: "none",
+      },
+    ]);
+  };
+
+  const updateOption = (index, updated) => {
+    const copy = [...options];
+    copy[index] = updated;
+    setOptions(copy);
+  };
+
+  const calculateBest = async () => {
+    const res = await calculate(options);
+    setResults(res);
+  };
 
   return (
-    <>
-      <div>
-        <a href="https://vite.dev" target="_blank">
-          <img src={viteLogo} className="logo" alt="Vite logo" />
-        </a>
-        <a href="https://react.dev" target="_blank">
-          <img src={reactLogo} className="logo react" alt="React logo" />
-        </a>
-      </div>
-      <h1>Vite + React</h1>
-      <div className="card">
-        <button onClick={() => setCount((count) => count + 1)}>
-          count is {count}
-        </button>
-        <p>
-          Edit <code>src/App.jsx</code> and save to test HMR
-        </p>
-      </div>
-      <p className="read-the-docs">
-        Click on the Vite and React logos to learn more
-      </p>
-    </>
-  )
-}
+    <div style={{ padding: 16, maxWidth: 600, margin: "auto" }}>
+      <h2>Best Value Calculator</h2>
 
-export default App
+      {options.map((opt, i) => (
+        <OptionForm
+          key={i}
+          option={opt}
+          onChange={(updated) => updateOption(i, updated)}
+        />
+      ))}
+
+      <button onClick={addOption}>+ Add Option</button>
+
+      <hr />
+
+      <button onClick={calculateBest}>Calculate</button>
+
+      <ResultList results={results} />
+    </div>
+  );
+}
