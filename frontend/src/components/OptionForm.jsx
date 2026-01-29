@@ -14,18 +14,18 @@ export default function OptionForm({ option, onChange }) {
 
       <input
         style={{ padding: 8, marginBottom: 6 }}
-        type="number"
-        placeholder="Price"
+        type="text"
+        inputMode="decimal"
         value={option.price}
-        onChange={(e) => update("price", Number(e.target.value))}
+        onChange={(e) => update("price", e.target.value)}
       />
 
       <input
         style={{ padding: 8, marginBottom: 6 }}
-        type="number"
-        placeholder="Size"
+        type="text"
+        inputMode="decimal"
         value={option.size}
-        onChange={(e) => update("size", Number(e.target.value))}
+        onChange={(e) => update("size", e.target.value)}
       />
 
       <select
@@ -66,7 +66,7 @@ export default function OptionForm({ option, onChange }) {
 
       {option.promoType === "discount" && (
         <input
-            style={{ padding: 8, marginBottom: 6 }}
+          style={{ padding: 8, marginBottom: 6 }}
           type="number"
           placeholder="Discount %"
           onChange={(e) => update("promoValue", Number(e.target.value))}
@@ -75,7 +75,7 @@ export default function OptionForm({ option, onChange }) {
 
       {option.promoType === "extra" && (
         <input
-            style={{ padding: 8, marginBottom: 6 }}
+          style={{ padding: 8, marginBottom: 6 }}
           type="number"
           placeholder="Extra %"
           onChange={(e) => update("promoValue", Number(e.target.value))}

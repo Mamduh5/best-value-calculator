@@ -50,14 +50,21 @@ export default function App() {
   };
 
   const calculateBest = async () => {
+
+    const normalizedOptions = options.map(o => ({
+      ...o,
+      price: Number(o.price || 0),
+      size: Number(o.size || 0),
+    }));
+
     let res;
 
     if (isOnline) {
       // online → use backend
-      res = await calculate(options);
+      res = await calculate(normalizedOptions);
     } else {
       // offline → calculate locally
-      res = calculateBestValue(options);
+      res = calculateBestValue(normalizedOptions);
     }
 
     setResults(res);
@@ -78,8 +85,6 @@ export default function App() {
     options.every(
       (o) => o.price > 0 && o.size > 0 && o.name.trim() !== ""
     );
-
-
 
   return (
     <div style={{ padding: 16, maxWidth: 600, margin: "auto" }}>
@@ -122,9 +127,6 @@ export default function App() {
       >
         {isOnline ? "Calculate" : "Calculate (Offline)"}
       </button>
-
-
-
 
       <ResultList results={results} />
       <HistoryList
