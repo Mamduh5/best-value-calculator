@@ -34,4 +34,11 @@ tell ngrok which port you want to forwart example
 ngrok http 4173
 ```
 
---note: you need to make sure ngrok exist before excute command, you can do that by trying "ngrok -help"
+note: you need to make sure ngrok exist before excute command, you can do that by trying "ngrok -help"
+---
+
+## Deployment
+This project is deploy on https://render.com/
+
+### What is render.com?
+render.com is a free web deployment via github repo
