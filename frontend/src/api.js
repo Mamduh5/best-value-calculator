@@ -1,5 +1,5 @@
 const API_URL =
-  import.meta.env.VITE_API_URL || "http://localhost:3001";
+  import.meta.env.VITE_API_URL || "https://best-value-api.onrender.com";
 
 export async function calculate(options) {
   const res = await fetch(`${API_URL}/calculate`, {
