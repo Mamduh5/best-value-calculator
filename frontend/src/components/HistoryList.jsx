@@ -1,12 +1,14 @@
 export default function HistoryList({ history, onSelect }) {
   if (!history.length) return null;
 
+
   return (
     <div style={{ marginTop: 24 }}>
       <h3>Recent</h3>
 
       {history.map(item => {
-        const best = item.results.find(r => r.isBest);
+        const bestIndex = item.results.findIndex(r => r.isBest);
+        const bestOption = item.options[bestIndex];
 
         return (
           <div
@@ -18,7 +20,7 @@ export default function HistoryList({ history, onSelect }) {
               cursor: "pointer",
             }}
           >
-            <strong>{best?.name}</strong>{" "}
+            <strong>{bestOption?.name}</strong>{" "}
             <span style={{ fontSize: 12, color: "#666" }}>
               ({timeAgo(item.createdAt)})
             </span>

@@ -28,7 +28,7 @@ export default function ResultList({ results }) {
                                 BEST VALUE
                             </span>
                         )}
-                        
+                        {"  "}
                         {r.name} – {r.costPerUnit.toFixed(4)} / {r.unit}
                     </li>
                 ))}

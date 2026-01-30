@@ -12,7 +12,7 @@ export default function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   const createEmptyOption = (overrides = {}) => ({
-    name: "option 1",
+    name: "",
     price: "",
     size: "",
     unit: overrides.unit ?? "g",
@@ -62,6 +62,14 @@ export default function App() {
     setOptions(copy);
   };
 
+  const withFallbackNames = (options) =>
+    options.map((o, i) => ({
+      ...o,
+      name:
+        o.name?.trim() ||
+        `Option ${i + 1} — ${o.price}/${o.size}${o.unit}`,
+    }));
+
   const calculateBest = async () => {
 
     const normalizedOptions = options.map(o => ({
@@ -85,7 +93,7 @@ export default function App() {
     const item = {
       id: crypto.randomUUID(),
       createdAt: Date.now(),
-      options,
+      options: withFallbackNames(options),
       results: res,
     };
 
