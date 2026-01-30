@@ -1,4 +1,14 @@
-export default function OptionForm({ option, onChange }) {
+import { useEffect, useRef } from "react";
+
+export default function OptionForm({ option, onChange, isLast }) {
+  const priceRef = useRef(null);
+
+  useEffect(() => {
+    if (isLast && priceRef.current) {
+      priceRef.current.focus();
+    }
+  }, [isLast]);
+
   const update = (field, value) => {
     onChange({ ...option, [field]: value });
   };
@@ -7,80 +17,50 @@ export default function OptionForm({ option, onChange }) {
     <div style={{ border: "1px solid #ccc", padding: 12, marginBottom: 8 }}>
       <input
         style={{ padding: 8, marginBottom: 6 }}
-        placeholder="Name"
+        placeholder="Name (optional)"
         value={option.name}
         onChange={(e) => update("name", e.target.value)}
       />
 
       <input
-        style={{ padding: 8, marginBottom: 6 }}
+        ref={priceRef}
+        style={{ padding: 10, marginBottom: 6, fontSize: 18 }}
         type="text"
         inputMode="decimal"
+        placeholder="Price"
         value={option.price}
         onChange={(e) => update("price", e.target.value)}
       />
 
       <input
-        style={{ padding: 8, marginBottom: 6 }}
+        style={{ padding: 10, marginBottom: 6, fontSize: 16 }}
         type="text"
         inputMode="decimal"
+        placeholder={`Size (${option.unit})`}
         value={option.size}
         onChange={(e) => update("size", e.target.value)}
       />
 
-      <select
-        value={option.unit}
-        onChange={(e) => update("unit", e.target.value)}
-      >
-        <option value="g">g</option>
-        <option value="ml">ml</option>
-        <option value="pcs">pcs</option>
-      </select>
+      <div style={{ display: "flex", gap: 8, marginBottom: 6 }}>
+        <select
+          value={option.unit}
+          onChange={(e) => update("unit", e.target.value)}
+        >
+          <option value="g">g</option>
+          <option value="ml">ml</option>
+          <option value="pcs">pcs</option>
+        </select>
 
-      <select
-        value={option.promoType}
-        onChange={(e) => update("promoType", e.target.value)}
-      >
-        <option value="none">No Promo</option>
-        <option value="buyXgetY">Buy X Get Y</option>
-        <option value="discount">% Discount</option>
-        <option value="extra">Extra %</option>
-      </select>
-
-      {option.promoType === "buyXgetY" && (
-        <>
-          <input
-            style={{ padding: 8, marginBottom: 6 }}
-            type="number"
-            placeholder="Buy X"
-            onChange={(e) => update("promoValue", Number(e.target.value))}
-          />
-          <input
-            style={{ padding: 8, marginBottom: 6 }}
-            type="number"
-            placeholder="Get Y"
-            onChange={(e) => update("promoExtra", Number(e.target.value))}
-          />
-        </>
-      )}
-
-      {option.promoType === "discount" && (
-        <input
-          style={{ padding: 8, marginBottom: 6 }}
-          type="number"
-          placeholder="Discount %"
-          onChange={(e) => update("promoValue", Number(e.target.value))}
-        />
-      )}
-
-      {option.promoType === "extra" && (
-        <input
-          style={{ padding: 8, marginBottom: 6 }}
-          type="number"
-          placeholder="Extra %"
-          onChange={(e) => update("promoValue", Number(e.target.value))}
-        />
-      )}
+        <select
+          value={option.promoType}
+          onChange={(e) => update("promoType", e.target.value)}
+        >
+          <option value="none">No Promo</option>
+          <option value="buyXgetY">Buy X Get Y</option>
+          <option value="discount">% Discount</option>
+          <option value="extra">Extra %</option>
+        </select>
+      </div>
     </div>
   );
 }

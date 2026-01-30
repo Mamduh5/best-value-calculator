@@ -7,10 +7,21 @@ import HistoryList from "./components/HistoryList";
 import { calculateBestValue } from "./calculator/calculate";
 
 export default function App() {
-  const [options, setOptions] = useState([]);
   const [results, setResults] = useState([]);
   const [history, setHistory] = useState(loadHistory());
   const [isOnline, setIsOnline] = useState(navigator.onLine);
+
+  const createEmptyOption = (overrides = {}) => ({
+    name: "option 1",
+    price: "",
+    size: "",
+    unit: overrides.unit ?? "g",
+    promoType: overrides.promoType ?? "none",
+  });
+
+  const [options, setOptions] = useState(() => [
+    createEmptyOption(),
+  ]);
 
   useEffect(() => {
     const onOnline = () => setIsOnline(true);
@@ -31,14 +42,16 @@ export default function App() {
   };
 
   const addOption = () => {
+    const last = options[options.length - 1];
+
     setOptions([
       ...options,
       {
-        name: "",
+        name: `Option ${options.length + 1}`,
         price: "",
         size: "",
-        unit: "g",
-        promoType: "none",
+        unit: last.unit,
+        promoType: last.promoType,
       },
     ]);
   };
@@ -81,9 +94,9 @@ export default function App() {
   };
 
   const canCalculate =
-    options.length > 0 &&
+    options.length >= 2 &&
     options.every(
-      (o) => o.price > 0 && o.size > 0 && o.name.trim() !== ""
+      (o) => Number(o.price) > 0 && Number(o.size) > 0
     );
 
   return (
@@ -94,6 +107,7 @@ export default function App() {
         <OptionForm
           key={i}
           option={opt}
+          isLast={i === options.length - 1}
           onChange={(updated) => updateOption(i, updated)}
         />
       ))}
@@ -110,23 +124,25 @@ export default function App() {
       </button>
       <hr />
 
-      <button
-        onClick={calculateBest}
-        disabled={!canCalculate}
-        style={{
-          opacity: isOnline ? 1 : 0.6,
-          width: "100%",
-          padding: "12px",
-          fontSize: "18px",
-          marginTop: "8px",
-          background: "#2563eb",
-          color: "white",
-          border: "none",
-          borderRadius: "8px",
-        }}
-      >
-        {isOnline ? "Calculate" : "Calculate (Offline)"}
-      </button>
+      {options.length >= 2 && (
+        <button
+          onClick={calculateBest}
+          disabled={!canCalculate}
+          style={{
+            opacity: isOnline ? 1 : 0.6,
+            width: "100%",
+            padding: "12px",
+            fontSize: "18px",
+            marginTop: "8px",
+            background: "#2563eb",
+            color: "white",
+            border: "none",
+            borderRadius: "8px",
+          }}
+        >
+          {isOnline ? "Calculate" : "Calculate (Offline)"}
+        </button>
+      )}
 
       <ResultList results={results} />
       <HistoryList
