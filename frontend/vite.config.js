@@ -33,6 +33,6 @@ export default defineConfig({
   ],
    preview: {
     allowedHosts: [
-      "8447e0929eca.ngrok-free.app",
+      "61f0-171-6-14-166.ngrok-free.app",
     ],}
 });

@@ -1,9 +1,11 @@
+import { COPY } from "../copy";
+
 export default function ResultList({ results }) {
     if (!results.length) return null;
 
     return (
         <div>
-            <h3>Results</h3>
+            <h3>{COPY[lang].resultTitle}</h3>
             <ul>
                 {results.map((r) => (
                     <li
@@ -25,7 +27,7 @@ export default function ResultList({ results }) {
                                     fontSize: 12,
                                 }}
                             >
-                                BEST VALUE
+                                {COPY[LANG].best}
                             </span>
                         )}
                         {"  "}

@@ -29,7 +29,7 @@ add token by using this command
 ngrok config add-authtoken 2waixSBCEsFu1dgtnIfAirRHljC_4hiFtY76rCUijAdNCNjty
 ```
 
-tell ngrok which port you want to forwart example
+tell ngrok which port you want to forwart example(for preview)
 ```sh
 ngrok http 4173
 ```

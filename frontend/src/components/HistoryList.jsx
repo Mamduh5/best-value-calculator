@@ -1,10 +1,12 @@
+import { COPY } from "../copy";
+
 export default function HistoryList({ history, onSelect }) {
   if (!history.length) return null;
 
 
   return (
     <div style={{ marginTop: 24 }}>
-      <h3>Recent</h3>
+      <h3>{COPY[LANG].history}</h3>
 
       {history.map(item => {
         const bestIndex = item.results.findIndex(r => r.isBest);

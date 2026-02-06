@@ -5,6 +5,9 @@ import { calculate } from "./api";
 import { loadHistory, saveToHistory } from "./history";
 import HistoryList from "./components/HistoryList";
 import { calculateBestValue } from "./calculator/calculate";
+import { COPY } from "./copy";
+
+const LANG = "th"; // default for wife
 
 export default function App() {
   const [results, setResults] = useState([]);
@@ -109,18 +112,20 @@ export default function App() {
 
   return (
     <div style={{ padding: 16, maxWidth: 600, margin: "auto" }}>
-      <h2>Best Value Calculator</h2>
-
+      <h2>{COPY[LANG].title}</h2>
+      <p>{COPY[LANG].subtitle}</p>
+      
       {options.map((opt, i) => (
         <OptionForm
           key={i}
           option={opt}
           isLast={i === options.length - 1}
+          lang={LANG}
           onChange={(updated) => updateOption(i, updated)}
         />
       ))}
 
-      <button onClick={addOption}>+ Add Option</button>
+      <button onClick={addOption}>{COPY[LANG].addOption}</button>
       <button
         onClick={() => {
           setOptions([]);
@@ -148,7 +153,7 @@ export default function App() {
             borderRadius: "8px",
           }}
         >
-          {isOnline ? "Calculate" : "Calculate (Offline)"}
+          {isOnline ? `{COPY[LANG].calculate}` : "Calculate (Offline)"}
         </button>
       )}
 

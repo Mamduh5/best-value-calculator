@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
+import { COPY } from "../copy";
 
-export default function OptionForm({ option, onChange, isLast }) {
+export default function OptionForm({ option, onChange, isLast, lang  }) {
   const priceRef = useRef(null);
 
   useEffect(() => {
@@ -27,7 +28,7 @@ export default function OptionForm({ option, onChange, isLast }) {
         style={{ padding: 10, marginBottom: 6, fontSize: 18 }}
         type="text"
         inputMode="decimal"
-        placeholder="Price"
+        placeholder={COPY[lang].price}
         value={option.price}
         onChange={(e) => update("price", e.target.value)}
       />
@@ -36,7 +37,7 @@ export default function OptionForm({ option, onChange, isLast }) {
         style={{ padding: 10, marginBottom: 6, fontSize: 16 }}
         type="text"
         inputMode="decimal"
-        placeholder={`Size (${option.unit})`}
+        placeholder={`${COPY[lang].size} (${option.unit})`}
         value={option.size}
         onChange={(e) => update("size", e.target.value)}
       />
