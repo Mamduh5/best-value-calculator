@@ -1,6 +1,6 @@
 import { COPY } from "../copy";
 
-export default function ResultList({ results }) {
+export default function ResultList({ results, lang }) {
     if (!results.length) return null;
 
     return (

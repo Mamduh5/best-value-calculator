@@ -1,6 +1,6 @@
 import { COPY } from "../copy";
 
-export default function HistoryList({ history, onSelect }) {
+export default function HistoryList({ history, onSelect, lang }) {
   if (!history.length) return null;
 
 
