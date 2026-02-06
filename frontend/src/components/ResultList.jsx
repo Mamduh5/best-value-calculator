@@ -27,7 +27,7 @@ export default function ResultList({ results }) {
                                     fontSize: 12,
                                 }}
                             >
-                                {COPY[LANG].best}
+                                {COPY[lang].best}
                             </span>
                         )}
                         {"  "}

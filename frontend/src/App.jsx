@@ -153,7 +153,7 @@ export default function App() {
             borderRadius: "8px",
           }}
         >
-          {isOnline ? `{COPY[LANG].calculate}` : "Calculate (Offline)"}
+          {isOnline ? `${COPY[LANG].calculate}` : "Calculate (Offline)"}
         </button>
       )}
 
