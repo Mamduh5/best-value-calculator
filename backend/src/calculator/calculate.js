@@ -1,15 +1,24 @@
 const { applyPromotion } = require("./promotions");
+const AppError = require("../utils/appError");
 
 function calculateBestValue(options) {
   if (!Array.isArray(options) || options.length === 0) {
-    throw new Error("options must be a non-empty array");
+     throw new AppError(
+      "Options must be a non-empty array",
+      400,
+      "INVALID_OPTIONS"
+    );
   }
 
   const calculated = options.map((option) => {
     const { effectivePrice, effectiveQuantity } = applyPromotion(option);
 
     if (effectiveQuantity <= 0) {
-      throw new Error("effective quantity must be greater than 0");
+       throw new AppError(
+      "Ouantity can't be 0 or null",
+      400,
+      "INVALID_QUANTITY"
+    );
     }
 
     const costPerUnit = effectivePrice / effectiveQuantity;

@@ -7,7 +7,11 @@ function applyPromotion(option) {
       const getY = promoExtra;
 
       if (!buyX || !getY) {
-        throw new Error("buyXgetY requires promoValue (buyX) and promoExtra (getY)");
+        throw new AppError(
+          "Require value x and y",
+          400,
+          "INVALID_INPUT"
+        );
       }
 
       return {
@@ -20,7 +24,11 @@ function applyPromotion(option) {
       const discountPercent = promoValue;
 
       if (discountPercent < 0 || discountPercent > 100) {
-        throw new Error("discount must be between 0 and 100");
+        throw new AppError(
+          "Discount must be between 1 - 100",
+          400,
+          "INVALID_DISCOUNT"
+        );
       }
 
       return {
@@ -33,7 +41,11 @@ function applyPromotion(option) {
       const extraPercent = promoValue;
 
       if (extraPercent < 0) {
-        throw new Error("extra percent must be >= 0");
+        throw new AppError(
+          "Extra percent must be more than 0",
+          400,
+          "INVALID_EXTRAPERCENT"
+        );
       }
 
       return {
