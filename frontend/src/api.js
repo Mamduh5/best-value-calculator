@@ -10,12 +10,13 @@ export async function calculate(options) {
 
   const data = await res.json();
 
-  if (!res.ok) {
-    throw new Error(data.error);
+  if (!data.ok) {
+    throw new Error(data.message);
   }
 
-  return data.results;
+  return data.data.results;
 }
+
 
 export async function warmUp() {
   try {
