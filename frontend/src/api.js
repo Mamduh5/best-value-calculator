@@ -16,3 +16,14 @@ export async function calculate(options) {
 
   return data.results;
 }
+
+export async function warmUp() {
+  try {
+    await fetch(`${API_URL}/health`, {
+      method: "GET",
+    });
+  } catch (err) {
+    // silent fail — no need to crash UI
+    console.warn("Health warm-up failed");
+  }
+}

@@ -1,7 +1,7 @@
 import { useState, useEffect } from "react";
 import OptionForm from "./components/OptionForm";
 import ResultList from "./components/ResultList";
-import { calculate } from "./api";
+import { calculate, warmUp } from "./api";
 import { loadHistory, saveToHistory } from "./history";
 import HistoryList from "./components/HistoryList";
 import { calculateBestValue } from "./calculator/calculate";
@@ -38,6 +38,15 @@ export default function App() {
       window.removeEventListener("offline", onOffline);
     };
   }, []);
+
+  useEffect(() => {
+  const hasWarmed = sessionStorage.getItem("apiWarmed");
+
+  if (!hasWarmed && navigator.onLine) {
+    warmUp();
+    sessionStorage.setItem("apiWarmed", "true");
+  }
+}, []);
 
   const loadFromHistory = (item) => {
     setOptions(item.options);
