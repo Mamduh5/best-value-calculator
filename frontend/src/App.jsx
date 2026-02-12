@@ -122,10 +122,12 @@ export default function App() {
 
   return (
     <div className="app-container">
-      <h2 className="title">{COPY[LANG].title}</h2>
-      <p className="subtitle">{COPY[LANG].subtitle}</p>
+      <header className="app-header">
+        <h2 className="title">{COPY[LANG].title}</h2>
+        <p className="subtitle">{COPY[LANG].subtitle}</p>
+      </header>
 
-      <div className="card">
+      <section className="options-section">
         {options.map((opt, i) => (
           <OptionForm
             key={i}
@@ -135,31 +137,37 @@ export default function App() {
             onChange={(updated) => updateOption(i, updated)}
           />
         ))}
+      
+      <div className="option-actions">
+        <button className="btn btn-primary" onClick={addOption}>{COPY[LANG].addOption}</button>
+        {options.length > 1 && (
+        <button
+          className="btn btn-primary"
+          onClick={() => {
+            setOptions([1]);
+            setResults([]);
+          }}
+        >
+          Clear
+        </button>
+        )}
       </div>
-
-      <button className="btn btn-primary" onClick={addOption}>{COPY[LANG].addOption}</button>
-      <button
-      className="btn btn-primary"
-        onClick={() => {
-          setOptions([]);
-          setResults([]);
-        }}
-      >
-        Clear
-      </button>
-      <hr />
+      </section>
+      
 
       {options.length >= 2 && (
-        <button
-          onClick={calculateBest}
-          disabled={!canCalculate}
-          className="btn btn-primary"
-        >
-          {isOnline ? `${COPY[LANG].calculate}` : "Calculate (Offline)"}
-        </button>
+        <section className="action-section">
+          <button
+            onClick={calculateBest}
+            disabled={!canCalculate}
+            className="btn btn-primary"
+          >
+            {isOnline ? `${COPY[LANG].calculate}` : "Calculate (Offline)"}
+          </button>
+        </section>
       )}
 
-      
+
       <ResultList results={results} lang={LANG} />
       <HistoryList history={history} lang={LANG} onSelect={loadFromHistory} />
     </div>
