@@ -1,27 +1,32 @@
 .app-container {
-  max-width: 720px;
-  margin: 0 auto;
-  padding: 24px 16px 80px;
+  max-width: 760px;
+  margin: 80px auto;
+  padding: 48px 40px;
+  background: #ffffff;
+  border-radius: 28px;
+  box-shadow: 0 30px 60px rgba(0, 0, 0, 0.06);
 }
 
 .title {
-  font-size: 24px;
+  font-size: 28px;
   font-weight: 700;
-  margin-bottom: 4px;
+  margin-bottom: 6px;
 }
 
 .subtitle {
   color: #64748b;
-  margin-bottom: 24px;
+  margin-bottom: 28px;
+  font-size: 14px;
 }
 
 .card {
-  background: white;
-  padding: 16px;
-  border-radius: 14px;
-  box-shadow: 0 6px 20px rgba(15, 23, 42, 0.05);
-  margin-bottom: 16px;
+  background: #faf9f7;
+  padding: 20px;
+  border-radius: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
 }
+
+
 
 input, select {
   width: 100%;
@@ -50,15 +55,19 @@ input:focus, select:focus {
 }
 
 .btn-primary {
-  background: #2563eb;
+  background: #3a5a40; /* calm deep green */
   color: white;
   width: 100%;
   font-size: 16px;
+  border-radius: 14px;
+  box-shadow: 0 6px 16px rgba(58, 90, 64, 0.2);
 }
 
 .btn-primary:hover {
-  background: #1d4ed8;
+  background: #344e41;
+  transform: translateY(-1px);
 }
+
 
 .btn-secondary {
   background: #e2e8f0;
@@ -70,7 +79,7 @@ input:focus, select:focus {
 }
 
 .results-section {
-  margin-top: 32px;
+  margin-top: 48px;
 }
 
 .results-title {
@@ -97,9 +106,10 @@ input:focus, select:focus {
 }
 
 .result-card.best {
-  border: 2px solid #2563eb;
-  background: #eff6ff;
+  border: none;
+  background: #e8f3ec;
 }
+
 
 .result-left {
   display: flex;
@@ -128,7 +138,7 @@ input:focus, select:focus {
 .option-card {
   display: flex;
   flex-direction: column;
-  gap: 12px;
+  gap: 16px;
 }
 
 .input {
@@ -170,7 +180,7 @@ input:focus, select:focus {
 }
 
 .history-section {
-  margin-top: 40px;
+  margin-top: 56px;
 }
 
 .history-title {
@@ -219,4 +229,11 @@ input:focus, select:focus {
 .history-arrow {
   font-size: 16px;
   color: #94a3b8;
+}
+
+@media (max-width: 768px) {
+  .app-container {
+    margin: 40px 16px;
+    padding: 28px 20px;
+  }
 }
