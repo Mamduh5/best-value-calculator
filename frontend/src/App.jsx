@@ -40,13 +40,13 @@ export default function App() {
   }, []);
 
   useEffect(() => {
-  const hasWarmed = sessionStorage.getItem("apiWarmed");
+    const hasWarmed = sessionStorage.getItem("apiWarmed");
 
-  if (!hasWarmed && navigator.onLine) {
-    warmUp();
-    sessionStorage.setItem("apiWarmed", "true");
-  }
-}, []);
+    if (!hasWarmed && navigator.onLine) {
+      warmUp();
+      sessionStorage.setItem("apiWarmed", "true");
+    }
+  }, []);
 
   const loadFromHistory = (item) => {
     setOptions(item.options);
@@ -120,27 +120,29 @@ export default function App() {
     );
 
   return (
-    <div style={{ padding: 16, maxWidth: 600, margin: "auto" }}>
-      <h2>{COPY[LANG].title}</h2>
-      <p>{COPY[LANG].subtitle}</p>
-      
-      {options.map((opt, i) => (
-        <OptionForm
-          key={i}
-          option={opt}
-          isLast={i === options.length - 1}
-          lang={LANG}
-          onChange={(updated) => updateOption(i, updated)}
-        />
-      ))}
+    <div className="app-container">
+      <h2 className="title">{COPY[LANG].title}</h2>
+      <p className="subtitle">{COPY[LANG].subtitle}</p>
 
-      <button onClick={addOption}>{COPY[LANG].addOption}</button>
+      <div className="card">
+        {options.map((opt, i) => (
+          <OptionForm
+            key={i}
+            option={opt}
+            isLast={i === options.length - 1}
+            lang={LANG}
+            onChange={(updated) => updateOption(i, updated)}
+          />
+        ))}
+      </div>
+
+      <button className="btn btn-primary" onClick={addOption}>{COPY[LANG].addOption}</button>
       <button
+      className="btn btn-primary"
         onClick={() => {
           setOptions([]);
           setResults([]);
         }}
-        style={{ marginTop: 8 }}
       >
         Clear
       </button>
@@ -150,24 +152,14 @@ export default function App() {
         <button
           onClick={calculateBest}
           disabled={!canCalculate}
-          style={{
-            opacity: isOnline ? 1 : 0.6,
-            width: "100%",
-            padding: "12px",
-            fontSize: "18px",
-            marginTop: "8px",
-            background: "#2563eb",
-            color: "white",
-            border: "none",
-            borderRadius: "8px",
-          }}
+          className="btn btn-primary"
         >
           {isOnline ? `${COPY[LANG].calculate}` : "Calculate (Offline)"}
         </button>
       )}
 
-      <ResultList results={results} lang={LANG}/>
-      <HistoryList history={history} lang={LANG} onSelect={loadFromHistory}/>
+      <ResultList results={results} lang={LANG} />
+      <HistoryList history={history} lang={LANG} onSelect={loadFromHistory} />
     </div>
   );
 }

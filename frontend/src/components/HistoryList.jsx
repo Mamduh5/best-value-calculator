@@ -3,32 +3,35 @@ import { COPY } from "../copy";
 export default function HistoryList({ history, onSelect, lang }) {
   if (!history.length) return null;
 
-
   return (
-    <div style={{ marginTop: 24 }}>
-      <h3>{COPY[lang].history}</h3>
+    <div className="history-section">
+      <h3 className="history-title">{COPY[lang].history}</h3>
 
-      {history.map(item => {
-        const bestIndex = item.results.findIndex(r => r.isBest);
-        const bestOption = item.options[bestIndex];
+      <div className="history-list">
+        {history.map((item) => {
+          const bestIndex = item.results.findIndex((r) => r.isBest);
+          const bestOption = item.options[bestIndex];
 
-        return (
-          <div
-            key={item.id}
-            onClick={() => onSelect(item)}
-            style={{
-              padding: 8,
-              borderBottom: "1px solid #ddd",
-              cursor: "pointer",
-            }}
-          >
-            <strong>{bestOption?.name}</strong>{" "}
-            <span style={{ fontSize: 12, color: "#666" }}>
-              ({timeAgo(item.createdAt)})
-            </span>
-          </div>
-        );
-      })}
+          return (
+            <div
+              key={item.id}
+              onClick={() => onSelect(item)}
+              className="history-item"
+            >
+              <div className="history-left">
+                <span className="history-name">
+                  {bestOption?.name}
+                </span>
+                <span className="history-time">
+                  {timeAgo(item.createdAt)}
+                </span>
+              </div>
+
+              <span className="history-arrow">→</span>
+            </div>
+          );
+        })}
+      </div>
     </div>
   );
 }

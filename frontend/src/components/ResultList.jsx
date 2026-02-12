@@ -1,40 +1,33 @@
 import { COPY } from "../copy";
 
 export default function ResultList({ results, lang }) {
-    if (!results.length) return null;
+  if (!results.length) return null;
 
-    return (
-        <div>
-            <h3>{COPY[lang].resultTitle}</h3>
-            <ul>
-                {results.map((r) => (
-                    <li
-                        key={r.name}
-                        style={{
-                            fontWeight: r.isBest ? "bold" : "normal",
-                            color: r.isBest ? "green" : "black",
-                        }}
+  return (
+    <div className="results-section">
+      <h3 className="results-title">{COPY[lang].resultTitle}</h3>
 
-                    >
-                        {r.isBest && (
-                            <span
-                                style={{
-                                    marginLeft: 8,
-                                    padding: "2px 6px",
-                                    background: "#16a34a",
-                                    color: "white",
-                                    borderRadius: 4,
-                                    fontSize: 12,
-                                }}
-                            >
-                                {COPY[lang].best}
-                            </span>
-                        )}
-                        {"  "}
-                        {r.name} – {r.costPerUnit.toFixed(4)} / {r.unit}
-                    </li>
-                ))}
-            </ul>
-        </div>
-    );
+      <div className="results-list">
+        {results.map((r) => (
+          <div
+            key={r.name}
+            className={`result-card ${r.isBest ? "best" : ""}`}
+          >
+            <div className="result-left">
+              <span className="result-name">{r.name}</span>
+              {r.isBest && (
+                <span className="best-badge">
+                  {COPY[lang].best}
+                </span>
+              )}
+            </div>
+
+            <div className="result-right">
+              {r.costPerUnit.toFixed(4)} / {r.unit}
+            </div>
+          </div>
+        ))}
+      </div>
+    </div>
+  );
 }

@@ -14,18 +14,20 @@ export default function OptionForm({ option, onChange, isLast, lang  }) {
     onChange({ ...option, [field]: value });
   };
 
-  return (
-    <div style={{ border: "1px solid #ccc", padding: 12, marginBottom: 8 }}>
-      <input
-        style={{ padding: 8, marginBottom: 6 }}
-        placeholder="Name (optional)"
-        value={option.name}
-        onChange={(e) => update("name", e.target.value)}
-      />
+return (
+  <div className="card option-card">
 
+    <input
+      className="input"
+      placeholder="Name (optional)"
+      value={option.name}
+      onChange={(e) => update("name", e.target.value)}
+    />
+
+    <div className="input-group">
       <input
         ref={priceRef}
-        style={{ padding: 10, marginBottom: 6, fontSize: 18 }}
+        className="input price-input"
         type="text"
         inputMode="decimal"
         placeholder={COPY[lang].price}
@@ -34,34 +36,39 @@ export default function OptionForm({ option, onChange, isLast, lang  }) {
       />
 
       <input
-        style={{ padding: 10, marginBottom: 6, fontSize: 16 }}
+        className="input"
         type="text"
         inputMode="decimal"
         placeholder={`${COPY[lang].size} (${option.unit})`}
         value={option.size}
         onChange={(e) => update("size", e.target.value)}
       />
-
-      <div style={{ display: "flex", gap: 8, marginBottom: 6 }}>
-        <select
-          value={option.unit}
-          onChange={(e) => update("unit", e.target.value)}
-        >
-          <option value="g">g</option>
-          <option value="ml">ml</option>
-          <option value="pcs">pcs</option>
-        </select>
-
-        <select
-          value={option.promoType}
-          onChange={(e) => update("promoType", e.target.value)}
-        >
-          <option value="none">No Promo</option>
-          <option value="buyXgetY">Buy X Get Y</option>
-          <option value="discount">% Discount</option>
-          <option value="extra">Extra %</option>
-        </select>
-      </div>
     </div>
-  );
+
+    <div className="select-group">
+      <select
+        className="input"
+        value={option.unit}
+        onChange={(e) => update("unit", e.target.value)}
+      >
+        <option value="g">g</option>
+        <option value="ml">ml</option>
+        <option value="pcs">pcs</option>
+      </select>
+
+      <select
+        className="input"
+        value={option.promoType}
+        onChange={(e) => update("promoType", e.target.value)}
+      >
+        <option value="none">No Promo</option>
+        <option value="buyXgetY">Buy X Get Y</option>
+        <option value="discount">% Discount</option>
+        <option value="extra">Extra %</option>
+      </select>
+    </div>
+
+  </div>
+);
+
 }
