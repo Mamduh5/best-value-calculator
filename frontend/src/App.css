@@ -8,22 +8,26 @@
 }
 
 .title {
-  font-size: 28px;
-  font-weight: 700;
-  margin-bottom: 6px;
+  font-size: 30px;
+  font-weight: 600;
+  margin-bottom: 8px;
+  letter-spacing: -0.5px;
 }
 
 .subtitle {
-  color: #64748b;
-  margin-bottom: 28px;
-  font-size: 14px;
+  font-size: 15px;
+  color: #6b6b6b;
+  margin-bottom: 40px;
 }
+
 
 .card {
   background: #faf9f7;
-  padding: 20px;
-  border-radius: 20px;
-  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.04);
+  padding: 24px;
+  border-radius: 18px;
+  box-shadow:
+    0 2px 4px rgba(0, 0, 0, 0.02),
+    0 12px 30px rgba(0, 0, 0, 0.05);
 }
 
 
@@ -33,7 +37,7 @@ input, select {
   padding: 10px 12px;
   margin-top: 6px;
   margin-bottom: 14px;
-  border-radius: 8px;
+  border-radius: 18px;
   border: 1px solid #cbd5e1;
   font-size: 14px;
   background: #ffffff;
@@ -48,7 +52,7 @@ input:focus, select:focus {
 .btn {
   border: none;
   padding: 12px 16px;
-  border-radius: 10px;
+  border-radius: 18px;
   font-weight: 600;
   cursor: pointer;
   transition: 0.15s ease;
@@ -95,7 +99,7 @@ input:focus, select:focus {
 
 .result-card {
   background: white;
-  border-radius: 12px;
+  border-radius: 18px;
   padding: 14px 16px;
   display: flex;
   justify-content: space-between;
@@ -106,10 +110,20 @@ input:focus, select:focus {
 }
 
 .result-card.best {
-  border: none;
   background: #e8f3ec;
+  position: relative;
 }
 
+.result-card.best::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 12px;
+  bottom: 12px;
+  width: 4px;
+  border-radius: 4px;
+  background: #3a5a40;
+}
 
 .result-left {
   display: flex;
@@ -144,7 +158,7 @@ input:focus, select:focus {
 .input {
   width: 100%;
   padding: 10px 12px;
-  border-radius: 8px;
+  border-radius: 18px;
   border: 1px solid #cbd5e1;
   font-size: 14px;
   background: white;
@@ -189,11 +203,11 @@ input:focus, select:focus {
 }
 
 .history-list {
-  background: white;
-  border-radius: 12px;
-  overflow: hidden;
-  border: 1px solid #e2e8f0;
+  background: #faf9f7;
+  border-radius: 18px;
+  padding: 8px;
 }
+
 
 .history-item {
   padding: 14px 16px;
@@ -229,6 +243,13 @@ input:focus, select:focus {
 .history-arrow {
   font-size: 16px;
   color: #94a3b8;
+}
+
+.section-divider {
+  height: 1px;
+  background: #eae6df;
+  margin: 48px 0;
+  border-radius: 2px;
 }
 
 @media (max-width: 768px) {

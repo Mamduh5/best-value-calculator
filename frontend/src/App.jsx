@@ -158,6 +158,7 @@ export default function App() {
         </button>
       )}
 
+      
       <ResultList results={results} lang={LANG} />
       <HistoryList history={history} lang={LANG} onSelect={loadFromHistory} />
     </div>
