@@ -6,7 +6,9 @@ export default defineConfig({
   plugins: [
     react(),
     VitePWA({
-      registerType: "autoUpdate",
+      devOptions: {
+        enabled: false,
+      },
       includeAssets: ["favicon.svg"],
       manifest: {
         name: "Best Value Calculator",
@@ -31,8 +33,9 @@ export default defineConfig({
       },
     }),
   ],
-   preview: {
+  preview: {
     allowedHosts: [
       "61f0-171-6-14-166.ngrok-free.app",
-    ],}
+    ],
+  }
 });

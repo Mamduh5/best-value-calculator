@@ -6,6 +6,7 @@ import { loadHistory, saveToHistory } from "./history";
 import HistoryList from "./components/HistoryList";
 import { calculateBestValue } from "./calculator/calculate";
 import { COPY } from "./copy";
+import "./App.css";
 
 const LANG = "th"; // default for wife
 
