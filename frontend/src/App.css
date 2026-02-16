@@ -98,20 +98,18 @@ input:focus, select:focus {
 }
 
 .result-card {
-  background: white;
+  background: #f7f5f2;
   border-radius: 18px;
-  padding: 14px 16px;
+  padding: 18px 20px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  box-shadow: 0 4px 14px rgba(15, 23, 42, 0.04);
-  border: 1px solid #e2e8f0;
   transition: 0.15s ease;
 }
 
+
 .result-card.best {
-  background: #e8f3ec;
-  position: relative;
+  background: #e6efe9;
 }
 
 .result-card.best::before {
@@ -137,17 +135,13 @@ input:focus, select:focus {
 
 .result-right {
   font-weight: 600;
-  color: #2563eb;
+  color: #3a5a40;
 }
 
-.best-badge {
-  background: #2563eb;
-  color: white;
-  font-size: 11px;
-  padding: 3px 8px;
-  border-radius: 999px;
-  font-weight: 600;
+.results-section {
+  margin-top: 64px;
 }
+
 
 .option-card {
   display: flex;
