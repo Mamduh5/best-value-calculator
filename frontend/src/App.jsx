@@ -127,6 +127,7 @@ export default function App() {
         <p className="subtitle">{COPY[LANG].subtitle}</p>
       </header>
 
+      <div className="surface">
       <section className="options-section">
         {options.map((opt, i) => (
           <OptionForm
@@ -170,6 +171,7 @@ export default function App() {
 
       <ResultList results={results} lang={LANG} />
       <HistoryList history={history} lang={LANG} onSelect={loadFromHistory} />
+    </div>
     </div>
   );
 }

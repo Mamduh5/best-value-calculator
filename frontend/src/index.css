@@ -4,7 +4,7 @@
 
 body {
   margin: 0;
-  font-family: -apple-system, BlinkMacSystemFont, "SF Pro Display", system-ui, sans-serif;
+  font-family: 'Inter', system-ui, sans-serif;
   background: #f5f3ef;
   color: #2f2f2f;
   letter-spacing: 0.2px;
