@@ -23,20 +23,29 @@ export default function App() {
     promoType: overrides.promoType ?? "none",
   });
 
+  const createEmptyOption2 = (overrides = {}) => ({
+    name: "",
+    price: "",
+    size: "",
+    unit: overrides.unit ?? "g",
+    promoType: overrides.promoType ?? "none",
+  });
+
   const [options, setOptions] = useState(() => [
     createEmptyOption(),
+    createEmptyOption2(),
   ]);
 
   useEffect(() => {
     const onOnline = () => setIsOnline(true);
     const onOffline = () => setIsOnline(false);
 
-    window.addEventListener("online", onOnline);
-    window.addEventListener("offline", onOffline);
+    globalThis.addEventListener("online", onOnline);
+    globalThis.addEventListener("offline", onOffline);
 
     return () => {
-      window.removeEventListener("online", onOnline);
-      window.removeEventListener("offline", onOffline);
+      globalThis.removeEventListener("online", onOnline);
+      globalThis.removeEventListener("offline", onOffline);
     };
   }, []);
 
@@ -55,7 +64,7 @@ export default function App() {
   };
 
   const addOption = () => {
-    const last = options[options.length - 1];
+    const last = options.at(-1);
 
     setOptions([
       ...options,
@@ -80,7 +89,7 @@ export default function App() {
       ...o,
       name:
         o.name?.trim() ||
-        `Option ${i + 1} — ${o.price}/${o.size}${o.unit}`,
+        `${COPY[LANG].calculate} ${i + 1}`,
     }));
 
   const calculateBest = async () => {
@@ -143,13 +152,13 @@ export default function App() {
         <button className="btn btn-primary" onClick={addOption}>{COPY[LANG].addOption}</button>
         {options.length > 1 && (
         <button
-          className="btn btn-primary"
+          className="btn btn-primary-clear"
           onClick={() => {
-            setOptions([1]);
+            setOptions([1],[2]);
             setResults([]);
           }}
         >
-          Clear
+          {COPY[LANG].clear}
         </button>
         )}
       </div>

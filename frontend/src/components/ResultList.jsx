@@ -23,7 +23,7 @@ export default function ResultList({ results, lang }) {
             </div>
 
             <div className="result-right">
-              {r.costPerUnit.toFixed(4)} / {r.unit}
+              {r.costPerUnit.toFixed(2)} / {r.unit}
             </div>
           </div>
         ))}
