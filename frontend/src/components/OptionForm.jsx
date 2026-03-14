@@ -28,8 +28,12 @@ return (
       <input
         ref={priceRef}
         className="input price-input"
-        type="text"
+        type="number"
+        required
+        min="0.01"
+        step="any"
         inputMode="decimal"
+        enterKeyHint="next"
         placeholder={COPY[lang].price}
         value={option.price}
         onChange={(e) => update("price", e.target.value)}
@@ -37,8 +41,12 @@ return (
 
       <input
         className="input"
-        type="text"
+        type="number"
+        required
+        min="0.01"
+        step="any"
         inputMode="decimal"
+        enterKeyHint="next"
         placeholder={`${COPY[lang].size} (${option.unit})`}
         value={option.size}
         onChange={(e) => update("size", e.target.value)}
