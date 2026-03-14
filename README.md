@@ -39,7 +39,8 @@ note: you need to make sure ngrok exist before excute command, you can do that b
 
 ## Deployment
 This project is deploy on https://render.com/
-Current v0.4
+Current v0.6
+Link: https://best-value-app.onrender.com/
 
 ### What is render.com?
 render.com is a free web deployment via github repo

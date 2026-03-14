@@ -1,0 +1,3 @@
+User-agent: *
+Allow: /
+Sitemap: https://best-value-app.onrender.com/sitemap.xml
