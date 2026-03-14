@@ -16,15 +16,7 @@ export default function App() {
   const [isOnline, setIsOnline] = useState(navigator.onLine);
 
   const createEmptyOption = (overrides = {}) => ({
-    name: "",
-    price: "",
-    size: "",
-    unit: overrides.unit ?? "g",
-    promoType: overrides.promoType ?? "none",
-  });
-
-  const createEmptyOption2 = (overrides = {}) => ({
-    name: "",
+    name: overrides.name ?? COPY[LANG].option1,
     price: "",
     size: "",
     unit: overrides.unit ?? "g",
@@ -32,8 +24,8 @@ export default function App() {
   });
 
   const [options, setOptions] = useState(() => [
-    createEmptyOption(),
-    createEmptyOption2(),
+    createEmptyOption({ name: COPY[LANG].option1 }),
+    createEmptyOption({ name: COPY[LANG].option2 }),
   ]);
 
   useEffect(() => {
@@ -118,7 +110,8 @@ export default function App() {
       options: withFallbackNames(options),
       results: res,
     };
-
+    //     console.log("options", options);
+    // console.log("results", res);
     const updatedHistory = saveToHistory(item);
     setHistory(updatedHistory);
   };
@@ -154,7 +147,7 @@ export default function App() {
         <button
           className="btn btn-primary-clear"
           onClick={() => {
-            setOptions([1],[2]);
+            setOptions([createEmptyOption({ name: COPY[LANG].option1 }), createEmptyOption({ name: COPY[LANG].option2 })]);
             setResults([]);
           }}
         >

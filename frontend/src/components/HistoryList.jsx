@@ -9,9 +9,8 @@ export default function HistoryList({ history, onSelect, lang }) {
 
       <div className="history-list">
         {history.map((item) => {
-          const bestIndex = item.results.findIndex((r) => r.isBest);
-          const bestOption = item.options[bestIndex];
-
+          const bestOption = item.results?.[0];
+          
           return (
             <div
               key={item.id}
@@ -20,7 +19,7 @@ export default function HistoryList({ history, onSelect, lang }) {
             >
               <div className="history-left">
                 <span className="history-name">
-                  {bestOption?.name}
+                  🥇 {bestOption?.name}
                 </span>
                 <span className="history-time">
                   {timeAgo(item.createdAt)}

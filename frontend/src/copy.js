@@ -9,9 +9,11 @@ export const COPY = {
     unit: "Unit",
     deal: "Deal (optional)",
     resultTitle: "Here’s what makes more sense:",
-    best: "This choice gives you more for your money.",
+    best: "gives you more for your money.",
     history: "Past comparisons",
-    clear: "Clear"
+    clear: "Clear",
+    option1: "Option 1",
+    option2: "Option 2"
   },
   th: {
     title: "อันไหนคุ้มกว่ากัน?",
@@ -23,8 +25,11 @@ export const COPY = {
     unit: "หน่วย",
     deal: "โปร (ไม่บังคับ)",
     resultTitle: "สรุปแบบเข้าใจง่าย:",
-    best: "ตัวเลือกนี้คุ้มค่าที่สุด",
+    best: "คุ้มค่าที่สุด",
     history: "การเปรียบเทียบที่ผ่านมา",
-    clear: "ล้างข้อมูล"
+    clear: "ล้างข้อมูล",
+    option1: "ตัวเลือกแรก",
+    option2: "ตัวเลือกที่สอง"
+
   },
 };

@@ -129,7 +129,8 @@ input:focus, select:focus {
 
 
 .result-card.best {
-  background: #e6efe9;
+  opacity: 0.9;
+  background: #f7f5f2;
 }
 
 .result-card.best::before {
@@ -140,7 +141,7 @@ input:focus, select:focus {
   bottom: 12px;
   width: 4px;
   border-radius: 4px;
-  background: #3a5a40;
+  background: #d9dfda;
 }
 
 .result-left {
@@ -153,11 +154,16 @@ input:focus, select:focus {
 .result-right {
   font-size: 14px;
   font-weight: 600;
-  color: #3a5a40;
+  color: #000000;
 }
 
 .result-name {
   font-weight: 600;
+}
+.best-badge{
+  font-size: 16px;
+  font-weight: 600;
+  color: rgb(0, 255, 0);
 }
 
 .option-card {
@@ -230,7 +236,7 @@ input:focus, select:focus {
 }
 
 .history-item:not(:last-child) {
-  border-bottom: 1px solid #f1f5f9;
+  border-bottom: 1px solid #f1f9f1;
 }
 
 .history-item:hover {
