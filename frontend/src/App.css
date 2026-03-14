@@ -308,3 +308,10 @@ input:focus, select:focus {
 .btn-ghost:hover {
   background: #f3f1ed;
 }
+
+.seo-section {
+  margin-top: 40px;
+  padding: 20px;
+  color: #444;
+  line-height: 1.6;
+}

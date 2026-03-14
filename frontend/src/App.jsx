@@ -222,6 +222,38 @@ export default function App() {
         <ResultList results={results} lang={LANG} />
         <HistoryList history={history} lang={LANG} onSelect={loadFromHistory} />
       </div>
+
+      <section className="seo-section">
+        <h2>Price per Gram Calculator</h2>
+
+        <p>
+          This tool helps you compare prices by gram or size to find the best value.
+          Simply enter the price and quantity of each product and the calculator will
+          show which option is cheaper per unit.
+        </p>
+
+        <h3>How to calculate price per gram</h3>
+
+        <p>
+          Price per gram = price ÷ quantity.
+          For example, if a snack costs 20 baht for 100 grams,
+          the price per gram is 0.20 baht.
+        </p>
+
+        <p>
+          Our calculator automatically compares multiple options so you can
+          instantly find the best deal when shopping.
+        </p>
+
+        <h2>คำนวณราคาต่อกรัม</h2>
+        <p>
+          เครื่องมือนี้ช่วยเปรียบเทียบราคาสินค้าเพื่อดูว่าตัวเลือกไหนคุ้มที่สุด
+          โดยคำนวณราคาต่อกรัมให้โดยอัตโนมัติ
+        </p>
+      </section>
+
     </div>
+
+
   );
 }
