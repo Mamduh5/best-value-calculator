@@ -109,26 +109,26 @@ export default function App() {
     }
 
     for (let i = 0; i < options.length; i++) {
-    const opt = options[i];
+      const opt = options[i];
 
-    if (!opt.price) {
-      addPopup("กรอกราคาให้ครบ", "error");
+      if (!opt.price) {
+        addPopup("กรอกราคาให้ครบ", "error");
 
-      const el = document.querySelectorAll(".price-input")[i];
-      el?.focus();
+        const el = document.querySelectorAll(".price-input")[i];
+        el?.focus();
 
-      return;
+        return;
+      }
+
+      if (!opt.size) {
+        addPopup("กรอกขนาดให้ครบ", "error");
+
+        const el = document.querySelectorAll(".input-group input")[i * 2 + 1];
+        el?.focus();
+
+        return;
+      }
     }
-
-    if (!opt.size) {
-      addPopup("กรอกขนาดให้ครบ", "error");
-
-      const el = document.querySelectorAll(".input-group input")[i * 2 + 1];
-      el?.focus();
-
-      return;
-    }
-  }
 
     const normalizedOptions = options.map(o => ({
       ...o,
@@ -168,6 +168,9 @@ export default function App() {
     <div className="app-container">
 
       <PopupStack popups={popups} removePopup={removePopup} />
+      <h1 style={{ display: "none" }}>
+        Price per gram calculator and snack value comparison tool
+      </h1>
 
       <header className="app-header">
         <h2 className="title">{COPY[LANG].title}</h2>
